@@ -1,0 +1,63 @@
+repos:
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: check-yaml
+    -   id: trailing-whitespace
+    -   id: check-added-large-files
+    -   id: fix-byte-order-marker
+    -   id: mixed-line-ending
+    -   id: check-merge-conflict
+
+# Format markdown docs.
+-   repo: https://github.com/executablebooks/mdformat
+    # Do this before other tools "fixing" the line endings
+    rev: 0.7.17
+    hooks:
+    -   id: mdformat
+        args: [--number, --end-of-line=keep]
+        additional_dependencies:
+            - mdformat-toc
+            - mdformat-config
+            - mdformat-gfm
+
+# Catch typos!
+-   repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+    -   id: codespell
+        args: ["-L crate"]
+
+
+-   repo: local
+    hooks:
+        # Format rust code.
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo
+        args: ["fmt", "--all", "--"]
+        language: system
+        types: [rust]
+        pass_filenames: false
+        always_run: true
+
+        # Lint rust code.
+      - id: cargo-clippy
+        name: Run cargo clippy
+        entry: cargo
+        args: ["clippy", "--all-targets", "--all-features", "--", "-D", "warnings"]
+        language: system
+        types: [rust]
+        pass_filenames: false
+        always_run: true
+
+        # Check rust types.
+      - id: cargo-check
+        name: Run cargo check
+        entry: cargo
+        args: ["check", "--all-targets", "--all-features"]
+        language: system
+        types: [rust]
+        pass_filenames: false
+        always_run: true

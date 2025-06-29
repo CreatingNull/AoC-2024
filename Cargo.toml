@@ -1,0 +1,17 @@
+[workspace]
+members = [
+    "aoc-lib",
+]
+
+[package]
+name = "aoc-2024"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aoc-lib = { path = "./aoc-lib"}
+clap = { version = "4.5.40", features = ["derive"] }
+regex = "1.11.1"
+
+[dev-dependencies]
+rstest = "0.25.0"
