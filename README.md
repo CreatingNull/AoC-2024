@@ -2,7 +2,7 @@
 
 [![Language](https://img.shields.io/badge/rust-1.88-red.svg?style=flat-square&logo=rust&logoColor=white)](https://blog.rust-lang.org/2025/06/26/Rust-1.88.0/)
 [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square&color=orange)](LICENSE.md)
-[![Stars](https://img.shields.io/badge/progress-0%20stars-000000.svg?logo=star&style=flat-square&color=yellow)](https://adventofcode.com/2021)
+[![Stars](https://img.shields.io/badge/progress-2%20stars-000000.svg?logo=star&style=flat-square&color=yellow)](https://adventofcode.com/2021)
 
 Very late post-release attempt at advent of code 2024 in Rust.
 
@@ -12,7 +12,8 @@ I am teaching myself Rust, so these are **not** ideal or reference solutions by 
 
 | Day | Challenge                         | Status                             |
 | --- | --------------------------------- | ---------------------------------- |
-| 1   | --- Day 1: Historian Hysteria --- | :star: :star: [Complete](src/day1) |
+| 1   | --- Day 1: Historian Hysteria --- | :star: :star: [Complete](src/day01) |
+| 2   | --- Day 2: Red-Nosed Reports ---  | [In Progress](src/day02)            |
 
 ## Personal Rules
 
@@ -41,6 +42,9 @@ There is also a helper crate `aoc-lib`, which just contains some general functio
 Each module contains `rstest` inline parametrized unit tests for verifying the results of the solutions against my verified results.
 These can be called with `cargo test --all --`, you can add `--nocapture --test-threads=1` if you to display results for the solutions.
 
+The unit tests borrow solution values for the actual task from constants defined in the systems tests limits `/tests/test_limits`.
+This is so they can be shared between the two test suites.
+
 ### CLI Runner
 
 The crate also builds to a CLI interface for calling the solutions on arbitrary data input (note the files must be named and formatted the same as ones in my source.).
@@ -64,6 +68,11 @@ Example:
 aoc-2024.exe --day=1 --part=1 --data=src/day01/data.txt
 🧩 Output: 1319616
 ```
+
+**Systems Test**
+
+In the `tests/` directory there are systems level tests against the CLI runner, to ensure unit tests solutions are reproducible via the binary.
+These can be run manually with `cargo test --test=system`.
 
 ## License
 

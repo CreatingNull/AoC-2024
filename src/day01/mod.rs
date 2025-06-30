@@ -45,14 +45,6 @@ pub fn part_two(path: &Path) -> i32 {
     similarity_score
 }
 
-fn count_frequency(vec: &[i32]) -> HashMap<i32, i32> {
-    let mut counts: HashMap<i32, i32> = HashMap::new();
-    for &value in vec {
-        *(counts.entry(value)).or_insert(0) += 1;
-    }
-    counts
-}
-
 /// Loads the input data and converts it into two vectors of integers.
 fn convert_data(path: &Path) -> (Vec<i32>, Vec<i32>) {
     let re: Regex = Regex::new(r"^(\d{1,})\s+(\d{1,})$").unwrap();
@@ -68,6 +60,14 @@ fn convert_data(path: &Path) -> (Vec<i32>, Vec<i32>) {
         }
     }
     (left, right)
+}
+
+fn count_frequency(vec: &[i32]) -> HashMap<i32, i32> {
+    let mut counts: HashMap<i32, i32> = HashMap::new();
+    for &value in vec {
+        *(counts.entry(value)).or_insert(0) += 1;
+    }
+    counts
 }
 
 #[cfg(test)]

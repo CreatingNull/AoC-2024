@@ -18,7 +18,7 @@ struct Cli {
 
     /// Path to the input file
     #[arg(
-        short,
+        short = 'f',  // Stop it clashing with day.
         long,
         value_parser = |s: &str| {
             let path = PathBuf::from(s);
